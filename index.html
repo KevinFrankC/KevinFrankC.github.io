@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adega da Zeth</title>
+    <!-- Carrega o Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configuração customizada do Tailwind com a paleta de cores Laranja e Preto
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Paleta da Zeth
+                        'zeth-black': '#1a1a1a', 
+                        'zeth-orange': '#FF7A00', // Laranja vibrante
+                        'zeth-dark-orange': '#CC6200',
+                        // Novo fundo para destacar
+                        'zeth-bg-dark': '#1F2937', // Zinc-900: Cinza muito escuro
+                    },
+                    fontFamily: {
+                        // Fonte moderna e limpa
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        /* Estilo para o fundo ser o novo cinza escuro e o texto padrão branco */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1F2937; /* Zeth BG Dark - Zinc-900 */
+            color: #ffffff; /* Texto claro */
+        }
+        /* Garantindo que as seções principais sejam fluidas */
+        .product-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .product-card:hover {
+            transform: scale(1.03); /* Levemente maior ao passar o mouse */
+            box-shadow: 0 10px 25px rgba(255, 122, 0, 0.5); /* Sombra laranja */
+        }
+        /* Estilo para o fundo do modal */
+        .modal-bg {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8 md:p-12 flex flex-col items-center justify-center min-h-screen">
+
+    <!-- Cabeçalho Principal -->
+    <header class="w-full text-center mb-10 md:mb-16">
+        <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-zeth-orange flex items-center justify-center gap-4">
+            <span class="text-3xl sm:text-4xl">🍗</span> <!-- Ícone de frango -->
+            Adega da Zeth
+            <span class="text-3xl sm:text-4xl">🍻</span> <!-- Ícone de cerveja/bebida -->
+        </h1>
+        <p class="mt-2 text-lg sm:text-xl text-gray-300">Seu pedido, na porta de casa. Selecione o que deseja!</p>
+    </header>
+
+    <!-- Container Central das Divisões (Responsivo Grid) -->
+    <main class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+
+        <!-- 1. Venda de Frango Assado (Categoria: alimento) -->
+        <div id="card-frango" data-category="alimento" class="product-card block bg-zeth-orange/10 border-4 border-zeth-orange rounded-3xl p-6 sm:p-8 text-center shadow-lg hover:shadow-xl">
+            <div class="text-6xl mb-4">🍗</div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-zeth-orange mb-2">Frango Assado</h2>
+            <p class="text-gray-200 text-lg">O melhor do bairro, suculento e crocante. Peça agora!</p>
+        </div>
+
+        <!-- 2. Venda de Refrigerante (Categoria: Sem Alcool, Energetico, GELO) -->
+        <div id="card-refrigerante" data-category="sem-alcool" class="product-card block bg-zeth-orange/10 border-4 border-zeth-orange rounded-3xl p-6 sm:p-8 text-center shadow-lg hover:shadow-xl">
+            <div class="text-6xl mb-4">🥤</div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-zeth-orange mb-2">Refrigerantes</h2>
+            <p class="text-gray-200 text-lg">Diversos sabores gelados para acompanhar sua refeição.</p>
+        </div>
+
+        <!-- 3. Venda de Cervejas (Categoria: Cerveja, Ice, Dose) -->
+        <div id="card-cervejas" data-category="alcool" class="product-card block bg-zeth-orange/10 border-4 border-zeth-orange rounded-3xl p-6 sm:p-8 text-center shadow-lg hover:shadow-xl">
+            <div class="text-6xl mb-4">🍺</div>
+            <h2 class="text-3xl sm:text-4xl font-bold text-zeth-orange mb-2">Cervejas & Drinks</h2>
+            <p class="text-gray-200 text-lg">Nacionais e importadas, trincando de geladas.</p>
+        </div>
+
+    </main>
+    
+    <!-- Link Flutuante do WhatsApp -->
+    <a id="whatsapp-link" href="#" target="_blank" class="fixed bottom-6 right-6 bg-zeth-orange text-zeth-black p-4 rounded-full shadow-2xl flex items-center space-x-2 font-bold text-lg hover:bg-zeth-dark-orange transition duration-300 transform hover:scale-105">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+            <path d="M12.000 2.000c-5.522 0-10 4.477-10 10 0 1.776.467 3.447 1.341 4.904l-1.341 4.904 5.068-1.579c1.429.395 2.924.604 4.473.604h.001c5.522 0 10-4.477 10-10s-4.478-10-10-10zm-1.028 14.542c-.225.295-.45.395-.815.395-.316 0-1.028-.158-1.424-.593-.414-.467-.659-1.054-.659-1.054s-.044-.087-.044-.225c0-.181.087-.319.192-.477.106-.158.264-.349.56-.633.295-.264.633-.659.839-.904.205-.245.45-.56.633-.785.181-.225.264-.349.422-.529.131-.158.192-.264.225-.37.044-.131 0-.295-.158-.453-.158-.158-.453-.414-.611-.56-.158-.131-.225-.225-.319-.395-.087-.131-.158-.319-.114-.499.044-.181.264-.499.422-.68.158-.158.349-.306.45-.41.106-.087.225-.192.349-.245.131-.064.264-.097.37-.097.106 0 .225.044.349.087.106.044.225.106.319.192.087.064.181.192.264.319.087.131.158.264.225.395.064.131.106.264.106.414 0 .225-.131.68-.414 1.144-.264.444-.73.888-1.166 1.314-1.298 1.332-1.796 1.639-1.927 1.761z"/>
+        </svg>
+        <span>Fale Conosco</span>
+    </a>
+
+    <!-- Modal de Listagem de Produtos -->
+    <div id="product-modal" class="modal-bg fixed inset-0 hidden items-center justify-center p-4 z-50">
+        <div class="bg-zeth-bg-dark border-4 border-zeth-orange p-6 rounded-xl shadow-2xl max-w-xl w-full max-h-[90vh] overflow-y-auto">
+            
+            <div class="flex justify-between items-center mb-6 border-b border-zeth-orange/50 pb-3">
+                <h3 id="modal-title" class="text-3xl font-bold text-zeth-orange">Categoria</h3>
+                <button id="close-modal" class="text-white text-3xl hover:text-zeth-orange transition-colors duration-200 focus:outline-none">&times;</button>
+            </div>
+
+            <div id="product-list" class="space-y-4">
+                <!-- Lista de produtos será injetada aqui -->
+            </div>
+
+            <div id="no-products" class="text-center text-gray-400 py-8 hidden">
+                <p>Nenhum produto encontrado nesta categoria no momento.</p>
+            </div>
+            
+            <p class="text-sm text-center text-gray-500 mt-6 pt-4 border-t border-zeth-orange/30">Estoque sujeito a alteração.</p>
+        </div>
+    </div>
+
+    <script>
+        // Variável de configuração: Número de telefone com código do país (sem + ou espaços)
+        const WHATSAPP_NUMBER = "5534999998888"; // SUBSTITUA PELO SEU NÚMERO
+        const MESSAGE = "Olá, gostaria de fazer um pedido na Adega da Zeth! Meu interesse é em: "; // A mensagem será complementada
+
+        // --- DADOS DO ESTOQUE (Baseado na tabela fornecida) ---
+        const INVENTORY_DATA = [
+            { nome: "Frango Assado", quantidade: 10, valor: "R$ 50,00", tipo: "alimento" },
+            // Cervejas
+            { nome: "ANTARTICA BOA", quantidade: 3, valor: "R$ 3,10", tipo: "Cerveja" },
+            { nome: "Budweiser 330ml", quantidade: 6, valor: "R$ 4,65", tipo: "Cerveja" },
+            { nome: "DUPLO MALTE 350 ML", quantidade: 69, valor: "R$ 3,25", tipo: "Cerveja" },
+            { nome: "KAISER", quantidade: 33, valor: "R$ 2,45", tipo: "Cerveja" },
+            { nome: "ORIGINAL 350 ML", quantidade: 47, valor: "R$ 3,59", tipo: "Cerveja" },
+            { nome: "SKOL 350 ML", quantidade: 95, valor: "R$ 2,95", tipo: "Cerveja" },
+            { nome: "Corona", quantidade: 12, valor: "R$ 6,00", tipo: "Cerveja" },
+            // Drinks (Dose)
+            { nome: "CANTINA DA SERRA", quantidade: 4, valor: "R$ 7,30", tipo: "Dose" },
+            { nome: "CHANCELER", quantidade: 2, valor: "R$ 23,00", tipo: "Dose" },
+            { nome: "DOMUS", quantidade: 1, valor: "R$ 14,00", tipo: "Dose" },
+            { nome: "DREHER 900 ML", quantidade: 3, valor: "R$ 19,00", tipo: "Dose" },
+            { nome: "GIN INVICTUS - MACA VERDE", quantidade: 1, valor: "R$ 15,50", tipo: "Dose" },
+            { nome: "GIN INVICTUS - MELANCIA", quantidade: 1, valor: "R$ 15,50", tipo: "Dose" },
+            { nome: "GIN INVICTUS - TRADICIONAL", quantidade: 3, valor: "R$ 15,50", tipo: "Dose" },
+            { nome: "PRESIDENTE cachaça", quantidade: 2, valor: "R$ 15,00", tipo: "Dose" },
+            { nome: "Red Label 1 L", quantidade: 2, valor: "R$ 77,50", tipo: "Dose" },
+            { nome: "VELHO BARREIRO", quantidade: 3, valor: "R$ 17,00", tipo: "Dose" },
+            { nome: "VINHO PERGOLA SECO 1L", quantidade: 2, valor: "R$ 19,20", tipo: "Dose" },
+            { nome: "VINHO PERGOLA SUAVE 1L", quantidade: 1, valor: "R$ 19,20", tipo: "Dose" },
+            { nome: "VINHO PERGOLA SUAVE 750ML", quantidade: 1, valor: "R$ 19,20", tipo: "Dose" },
+            { nome: "VODKA INTENCION", quantidade: 4, valor: "R$ 13,00", tipo: "Dose" },
+            { nome: "Vodka ORLOKF", quantidade: 6, valor: "R$ 21,00", tipo: "Dose" },
+            { nome: "VODKA SMIRNOFF", quantidade: 1, valor: "R$ 35,90", tipo: "Dose" },
+            { nome: "WHITE HORSE 1 L", quantidade: 2, valor: "R$ 65,90", tipo: "Dose" },
+            { nome: "Barril Dourado Frutas vermelas", quantidade: 4, valor: "R$ 3,40", tipo: "Dose" },
+            { nome: "Barril Dourado Maracuja", quantidade: 3, valor: "R$ 3,40", tipo: "Dose" },
+            { nome: "Cantina sertaneja", quantidade: 4, valor: "R$ 3,40", tipo: "Dose" },
+            { nome: "Draft", quantidade: 4, valor: "R$ 8,20", tipo: "Dose" },
+            // Ice
+            { nome: "Ice 51 Limão", quantidade: 18, valor: "R$ 5,00", tipo: "Ice" },
+            { nome: "Ice Cabaré Frutas vermelhas", quantidade: 18, valor: "R$ 6,00", tipo: "Ice" },
+            { nome: "Ice Cabaré Limão", quantidade: 17, valor: "R$ 6,00", tipo: "Ice" },
+            { nome: "Skol Beats red mix", quantidade: 9, valor: "R$ 6,20", tipo: "Ice" },
+            { nome: "syn", quantidade: 6, valor: "R$ 2,50", tipo: "Ice" },
+            // Sem Álcool (Refrigerantes e Água)
+            { nome: "Agua S/ gás Mineiro 500 ML", quantidade: 20, valor: "R$ 1,50", tipo: "Sem alcool" },
+            { nome: "Fanta Laranja 2L", quantidade: 10, valor: "R$ 7,15", tipo: "Sem alcool" },
+            { nome: "Fanta Laranja Lata", quantidade: 3, valor: "R$ 2,49", tipo: "Sem alcool" },
+            { nome: "Fanta Uva 2L", quantidade: 8, valor: "R$ 7,15", tipo: "Sem alcool" },
+            { nome: "Fanta Uva lata", quantidade: 7, valor: "R$ 2,49", tipo: "Sem alcool" },
+            { nome: "Guarana antartica 200ml", quantidade: 17, valor: "R$ 1,20", tipo: "Sem alcool" },
+            { nome: "Guarana antartica 2l", quantidade: 3, valor: "R$ 6,00", tipo: "Sem alcool" },
+            { nome: "Guarana Mineiro 2l", quantidade: 8, valor: "R$ 5,49", tipo: "Sem alcool" },
+            { nome: "Guarana Mineiro 600 ml", quantidade: 8, valor: "R$ 3,40", tipo: "Sem alcool" },
+            { nome: "Pepsi 2l", quantidade: 2, valor: "R$ 6,68", tipo: "Sem alcool" },
+            { nome: "Pepsi 2l zero", quantidade: 5, valor: "R$ 6,50", tipo: "Sem alcool" },
+            { nome: "Sprite 2l", quantidade: 13, valor: "R$ 6,50", tipo: "Sem alcool" },
+            { nome: "Agua C/ Gás Mineiro 500 ml", quantidade: 12, valor: "R$ 1,50", tipo: "Sem alcool" },
+            { nome: "Coca 1 L", quantidade: 5, valor: "R$ 5,50", tipo: "Sem alcool" },
+            { nome: "Mineiro 600 ml", quantidade: 8, valor: "R$ 3,30", tipo: "Sem alcool" },
+            { nome: "Del Vale Laranja", quantidade: 2, valor: "R$ 6,30", tipo: "Sem alcool" },
+            { nome: "Del Vale Maracuja", quantidade: 1, valor: "R$ 6,30", tipo: "Sem alcool" },
+            { nome: "Del Vale Manga", quantidade: 1, valor: "R$ 6,30", tipo: "Sem alcool" },
+            { nome: "Del Vale caju zero", quantidade: 3, valor: "R$ 6,30", tipo: "Sem alcool" },
+            { nome: "Del Vale Abacaxi", quantidade: 2, valor: "R$ 6,30", tipo: "Sem alcool" },
+            { nome: "Agua Tonica Fly", quantidade: 9, valor: "R$ 2,25", tipo: "Sem alcool" },
+            // Energéticos
+            { nome: "Energetico Baly - Maça verde 2 L", quantidade: 3, valor: "R$ 10,00", tipo: "Energetico" },
+            { nome: "Energetico Baly - Abacaxi com Hortelã 2L", quantidade: 3, valor: "R$ 10,00", tipo: "Energetico" },
+            { nome: "Energetico Baly - Coco com açai 2 L", quantidade: 3, valor: "R$ 10,00", tipo: "Energetico" },
+            { nome: "Energetico Baly - Melancia 2 L", quantidade: 2, valor: "R$ 10,00", tipo: "Energetico" },
+            { nome: "Energetico Baly - Tradicional 2 L", quantidade: 4, valor: "R$ 10,00", tipo: "Energetico" },
+            { nome: "Energetico Baly - Tropical 2 L", quantidade: 3, valor: "R$ 10,00", tipo: "Energetico" },
+            { nome: "Jack 2 L", quantidade: 5, valor: "R$ 5,50", tipo: "Energetico" },
+            { nome: "Jack de maça verde 2 L", quantidade: 12, valor: "R$ 5,50", tipo: "Energetico" },
+            { nome: "jack de melancia 2 L", quantidade: 6, valor: "R$ 5,50", tipo: "Energetico" },
+            { nome: "Monster sem açucar", quantidade: 4, valor: "R$ 6,68", tipo: "Energetico" },
+            { nome: "MONSTER ULTRA PEACHY", quantidade: 7, valor: "R$ 6,69", tipo: "Energetico" },
+            { nome: "MONSTER ULTRA VIOLET", quantidade: 4, valor: "R$ 6,69", tipo: "Energetico" },
+            { nome: "Red Bul", quantidade: 15, valor: "R$ 6,99", tipo: "Energetico" },
+            // Gelo
+            { nome: "GELO 2Kg", quantidade: 6, valor: "R$ 3,60", tipo: "GELO" },
+            { nome: "GELO 4Kg", quantidade: 5, valor: "R$ 6,60", tipo: "GELO" },
+            { nome: "GELO 8Kg", quantidade: 3, valor: "R$ 9,50", tipo: "GELO" },
+            { nome: "GELO SABOR - MAÇA VERDE", quantidade: 27, valor: "R$ 2,50", tipo: "GELO" },
+            { nome: "GELO SABOR - COCO", quantidade: 20, valor: "R$ 2,50", tipo: "GELO" },
+            { nome: "GELO SABOR - LIMAO", quantidade: 24, valor: "R$ 2,50", tipo: "GELO" },
+            { nome: "GELO SABOR - MARACUJA", quantidade: 29, valor: "R$ 2,50", tipo: "GELO" },
+            { nome: "GELO SABOR - MELANCIA", quantidade: 28, valor: "R$ 2,50", tipo: "GELO" },
+            // Itens ignorados: SEDA ZOMO e Palheiro F&G (Tabacaria)
+        ];
+
+        // Mapeamento das categorias principais (cards) para os tipos de estoque (tipo)
+        const CATEGORY_MAPPING = {
+            'alimento': { 
+                title: 'Frango Assado', 
+                types: ['alimento'] 
+            },
+            'sem-alcool': { 
+                title: 'Refrigerantes, Energéticos e Gelo', 
+                types: ['Sem alcool', 'Energetico', 'GELO'] 
+            },
+            'alcool': { 
+                title: 'Cervejas, Ice e Doses', 
+                types: ['Cerveja', 'Ice', 'Dose'] 
+            }
+        };
+
+        // Referências DOM do Modal
+        const productModal = document.getElementById('product-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const productList = document.getElementById('product-list');
+        const noProductsMessage = document.getElementById('no-products');
+        const closeModalButton = document.getElementById('close-modal');
+
+        /**
+         * Renderiza a lista de produtos no modal
+         * @param {string} categoryKey - A chave da categoria ('alimento', 'sem-alcool', 'alcool').
+         */
+        function openProductListModal(categoryKey) {
+            const mapping = CATEGORY_MAPPING[categoryKey];
+            const allowedTypes = mapping.types;
+            
+            // 1. Filtra os produtos
+            const filteredProducts = INVENTORY_DATA.filter(p => allowedTypes.includes(p.tipo));
+
+            // 2. Atualiza o título do modal
+            modalTitle.textContent = mapping.title;
+            
+            // 3. Renderiza a lista
+            productList.innerHTML = '';
+            
+            if (filteredProducts.length > 0) {
+                noProductsMessage.classList.add('hidden');
+                
+                let currentType = '';
+                
+                filteredProducts.forEach(product => {
+                    // Adiciona um separador se o Tipo mudar (útil para Refrigerantes/Energéticos/Gelo)
+                    if (product.tipo !== currentType) {
+                        currentType = product.tipo;
+                        const typeHeader = document.createElement('h4');
+                        typeHeader.className = 'text-lg font-bold text-zeth-orange mt-6 mb-2 border-b border-zeth-orange/50 pb-1';
+                        typeHeader.textContent = currentType.toUpperCase();
+                        productList.appendChild(typeHeader);
+                    }
+
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'flex flex-col sm:flex-row justify-between p-3 bg-zeth-bg-dark/50 rounded-lg border border-gray-700 hover:bg-zeth-bg-dark/70 transition-colors duration-200';
+                    itemDiv.innerHTML = `
+                        <div class="flex-1">
+                            <p class="font-semibold text-gray-200">${product.nome}</p>
+                        </div>
+                        <div class="flex items-center space-x-4 mt-2 sm:mt-0">
+                            <span class="text-sm text-gray-400">Estoque: <strong class="${product.quantidade > 5 ? 'text-green-400' : 'text-yellow-400'}">${product.quantidade}</strong></span>
+                            <span class="text-xl font-extrabold text-zeth-orange">${product.valor}</span>
+                        </div>
+                    `;
+                    productList.appendChild(itemDiv);
+                });
+            } else {
+                noProductsMessage.classList.remove('hidden');
+            }
+
+            // 4. Exibe o modal
+            productModal.classList.remove('hidden');
+            productModal.classList.add('flex');
+        }
+
+        /**
+         * Fecha o modal.
+         */
+        function closeModal() {
+            productModal.classList.add('hidden');
+            productModal.classList.remove('flex');
+        }
+
+        // --- Configuração dos Event Listeners ---
+        
+        window.onload = function() {
+            // Monta o link do WhatsApp
+            const whatsappLink = document.getElementById('whatsapp-link');
+            const encodedMessage = encodeURIComponent(MESSAGE);
+            whatsappLink.href = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodedMessage}`;
+
+            // Adiciona listeners aos cards principais
+            const cards = [
+                document.getElementById('card-frango'),
+                document.getElementById('card-refrigerante'),
+                document.getElementById('card-cervejas')
+            ];
+
+            cards.forEach(card => {
+                card.addEventListener('click', (e) => {
+                    // Impede o comportamento de link (que definimos anteriormente como <a>#frango</a>, agora é <div>)
+                    e.preventDefault(); 
+                    const category = card.getAttribute('data-category');
+                    openProductListModal(category);
+                });
+            });
+
+            // Listener para fechar o modal
+            closeModalButton.addEventListener('click', closeModal);
+            productModal.addEventListener('click', (e) => {
+                // Fecha o modal se clicar fora do conteúdo
+                if (e.target.id === 'product-modal') {
+                    closeModal();
+                }
+            });
+        };
+    </script>
+    <footer class="mt-16 text-center text-sm text-gray-500">
+    <p>Site 100% criado pelo Gemini, para fins de estudo.</p>
+    <p class="mt-1">&copy; 2025 Adega da Zeth. Todos os direitos reservados.</p>
+</footer>
+</body>
+</html>
